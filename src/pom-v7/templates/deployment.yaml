@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "Pom-v7.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "Pom-v7.name" . }}
+    helm.sh/chart: {{ include "Pom-v7.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "Pom-v7.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "Pom-v7.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ .Values.configMapValues | toString | sha256sum}}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{required "Must set image.repository" .Values.image.repository }}/{{required "Must set image.name" .Values.image.name }}:{{required "must set image.tag" .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet: {{- .Values.livenessProbe | toYaml | trimSuffix "\n" | nindent 14 }}
+          readinessProbe:
+            httpGet: {{- .Values.readinessProbe | toYaml | trimSuffix "\n" | nindent 14 }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Release.Name }}-conf
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
