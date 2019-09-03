@@ -21,6 +21,11 @@ spec:
       annotations:
         deploymentHash: {{.Values.deploymentHash | required "deploymentHash is required"}}
         checksum/config: {{ .Values.configMapValues | toString | sha256sum}}
+        {{- if .Values.deployment.annotations}}
+        {{- range $key, $val := .Values.deployment.annotations }}
+        {{ $key }}: {{ $val }}
+        {{- end}}
+        {{- end }}
     spec:
       containers:
         - name: {{ .Chart.Name }}

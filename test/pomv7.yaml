@@ -1,0 +1,16 @@
+image:
+  repository: 000000000.dkr.ecr.us-east-2.amazonaws.com
+  name: com-pomv7-app
+  tag: staging
+  pullPolicy: Always
+deployment:
+  annotations:
+    iam.amazonaws.com/role: "some aws role"
+service:
+  annotations:
+    traefik.ingress.kubernetes.io/affinity: "true"
+ingress:
+  hosts:
+    - something.local
+configMapValues:
+  DeployEnv: "staging"

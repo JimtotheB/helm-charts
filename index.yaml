@@ -3,20 +3,20 @@ entries:
   pom-v7:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-09-03T14:22:55.031563-04:00
+    created: 2019-09-03T13:29:59.97284-04:00
     description: A Helm chart for Running Pomegranate v7
-    digest: 191995531271d763284fcdf7473772f618f9122a990d60ddd93d5b289785297c
+    digest: 36d59723aeb448bc11d47187b0352116d170083fe328fea9b1a1c63c3fd697f6
     name: pom-v7
     urls:
-    - https://jimtotheb.github.io/helm-charts/pom-v7-0.0.2.tgz
+    - docs/pom-v7-0.0.2.tgz
     version: 0.0.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-09-03T14:22:55.031339-04:00
+    created: 2019-09-03T13:29:59.972527-04:00
     description: A Helm chart for Running Pomegranate v7
     digest: f1c319bde8e8131d12eb22ef39dfede3a2fa18eac44401952d819d2bfc4c0c42
     name: pom-v7
     urls:
-    - https://jimtotheb.github.io/helm-charts/pom-v7-0.0.1.tgz
+    - docs/pom-v7-0.0.1.tgz
     version: 0.0.1
-generated: 2019-09-03T14:22:55.029756-04:00
+generated: 2019-09-03T13:29:59.971972-04:00

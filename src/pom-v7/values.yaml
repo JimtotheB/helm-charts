@@ -24,9 +24,13 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+deployment:
+  annotations: {}
+
 service:
   type: ClusterIP
   port: 80
+  annotations: {}
 
 ingress:
   enabled: true

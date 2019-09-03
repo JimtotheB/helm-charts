@@ -4,6 +4,12 @@
 
 - Pom-v7
 
+### Test Rendering
+
+```shell
+helm template . --values ../../test/pomv7.yaml --set deploymentHash=fhfhf
+```
+
 ### Updating
 
 ```shell
