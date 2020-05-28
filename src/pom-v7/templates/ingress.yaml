@@ -1,13 +1,13 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "Pom-v7.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
-
+{{- $releasename := include "Pom-v7.dnsName" .}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ include "Pom-v7.dnsName" . }}
   labels:
-    app.kubernetes.io/name: {{ include "Pom-v7.name" . }}
+    app.kubernetes.io/name: {{ include "Pom-v7.fullname" . }}
     helm.sh/chart: {{ include "Pom-v7.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -33,7 +33,7 @@ spec:
         paths:
           - path: {{ $ingressPath }}
             backend:
-              serviceName: {{ $fullName }}
+              serviceName: {{ $releasename }}
               servicePort: http
   {{- end }}
 {{- end }}

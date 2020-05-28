@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: "{{ include "Pom-v7.fullname" . }}-test-connection"
   labels:
-    app.kubernetes.io/name: {{ include "Pom-v7.name" . }}
+    app.kubernetes.io/name: {{ include "Pom-v7.fullname" . }}
     helm.sh/chart: {{ include "Pom-v7.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -14,5 +14,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ include "Pom-v7.fullname" . }}:{{ .Values.service.port }}']
+      args:  ['{{ include "Pom-v7.dnsName" . }}:{{ .Values.service.port }}']
   restartPolicy: Never

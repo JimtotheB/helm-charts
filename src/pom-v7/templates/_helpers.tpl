@@ -2,6 +2,11 @@
 {{/*
 Expand the name of the chart.
 */}}
+
+{{- define "Pom-v7.dnsName" -}}
+{{- default .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 {{- define "Pom-v7.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}

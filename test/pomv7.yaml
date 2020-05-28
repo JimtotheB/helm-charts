@@ -3,6 +3,13 @@ image:
   name: com-pomv7-app
   tag: staging
   pullPolicy: Always
+
+startupProbe:
+  httpGet:
+    path: /
+    port: http
+    failureThreshold: 20
+    periodSeconds: 3
 deployment:
   annotations:
     iam.amazonaws.com/role: "some aws role"
@@ -10,6 +17,10 @@ service:
   annotations:
     traefik.ingress.kubernetes.io/affinity: "true"
 ingress:
+  tls:
+    - secretName: "bob"
+      hosts:
+        - something.local
   hosts:
     - something.local
 configMapValues:
