@@ -8,25 +8,28 @@ replicaCount: 1
 containerPort: 8080
 
 livenessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 3
   httpGet:
     path: /
     port: http
-    initialDelaySeconds: 10
-    periodSeconds: 3
+
 
 readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 3
   httpGet:
     path: /
     port: http
-    initialDelaySeconds: 10
-    periodSeconds: 3
+
 
 startupProbe: {}
+#failureThreshold: 20
+#periodSeconds: 3
 #httpGet:
 #  path: /
 #  port: http
-#  failureThreshold: 20
-#  periodSeconds: 3
+
 
 image:
   repository:
