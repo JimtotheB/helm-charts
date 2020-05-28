@@ -7,12 +7,10 @@ metadata:
     helm.sh/chart: {{ include "Pom-v7.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- with .Values.service.annotations }}
   annotations:
-    {{- if .Values.service.annotations}}
-    {{- range $key, $val := .Values.service.annotations }}
-    {{ $key }}: {{ $val }}
-    {{- end}}
-    {{- end }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
