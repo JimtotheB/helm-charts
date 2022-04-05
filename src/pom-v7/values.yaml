@@ -41,6 +41,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 deployment:
+  restartPolicy: "OnFailure"
+  serviceAccountName: ""
   annotations: {}
 
 service:

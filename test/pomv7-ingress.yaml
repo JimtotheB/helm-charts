@@ -11,6 +11,8 @@ startupProbe:
     failureThreshold: 20
     periodSeconds: 3
 deployment:
+  restartPolicy: OnFailure
+  serviceAccountName: ""
   annotations:
     iam.amazonaws.com/role: "some aws role"
 service:

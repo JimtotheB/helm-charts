@@ -1,0 +1,23 @@
+image:
+  repository: 000000000.dkr.ecr.us-east-2.amazonaws.com
+  name: com-pomv7-app
+  tag: staging
+  pullPolicy: Always
+
+startupProbe:
+  httpGet:
+    path: /
+    port: http
+    failureThreshold: 20
+    periodSeconds: 3
+deployment:
+  restartPolicy: OnFailure
+  serviceAccountName: "bobabbble"
+#  annotations:
+#    iam.amazonaws.com/role: "some aws role"
+service:
+  annotations:
+    traefik.ingress.kubernetes.io/affinity: "true"
+ingress: {}
+configMapValues:
+  DeployEnv: "staging"

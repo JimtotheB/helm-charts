@@ -45,6 +45,10 @@ spec:
               name: {{ .Release.Name }}-conf
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      restartPolicy: {{.Values.deployment.restartPolicy}}
+      {{- if .Values.deployment.serviceAccountName}}
+      serviceAccountName: {{.Values.deployment.serviceAccountName}}
+      {{end}}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
